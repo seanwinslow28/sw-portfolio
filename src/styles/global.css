@@ -1,0 +1,397 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   SW Design System Tokens — Imported from sw-design-system
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   BASE RESET & FOUNDATION
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -moz-text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+  text-size-adjust: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  hanging-punctuation: first last;
+}
+
+body {
+  min-height: 100dvh;
+  line-height: 1.6;
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-primary);
+  background-color: var(--surface-0);
+  transition: background-color 250ms ease, color 250ms ease;
+}
+
+img, picture, video, canvas, svg { display: block; max-width: 100%; height: auto; }
+input, button, textarea, select { font: inherit; color: inherit; }
+button { cursor: pointer; background: none; border: none; }
+table { border-collapse: collapse; width: 100%; }
+
+h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
+p, li, figcaption { text-wrap: pretty; max-width: 72ch; }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border-width: 0;
+}
+
+/* --------------------------------------------------------------------------
+   LIGHT MODE (Portfolio Default — Origin Story)
+   -------------------------------------------------------------------------- */
+:root {
+  --color-primary: #1E40AF;
+  --color-primary-muted: #1E3A8A;
+  --color-accent: #C2410C;
+  --color-accent-muted: #9A3412;
+
+  --surface-0: #FAFAF8;
+  --surface-1: #F5F5F0;
+  --surface-2: #EBEBE4;
+  --surface-3: #D4D4CC;
+
+  --text-primary: #18181B;
+  --text-secondary: #52525B;
+  --text-tertiary: #A1A1AA;
+
+  --color-success: #22C55E;
+  --color-warning: #F97316;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
+
+  --font-display: 'Sora', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --text-display: clamp(36px, 5vw, 56px);
+  --text-display-lh: 1.1;
+  --text-h1: clamp(30px, 4vw, 40px);
+  --text-h1-lh: 1.2;
+  --text-h2: clamp(24px, 3vw, 32px);
+  --text-h2-lh: 1.3;
+  --text-h3: clamp(20px, 2.5vw, 24px);
+  --text-h3-lh: 1.4;
+  --text-h4: 18px;
+  --text-h4-lh: 1.4;
+  --text-body: 16px;
+  --text-body-lh: 1.6;
+  --text-small: 14px;
+  --text-small-lh: 1.5;
+  --text-caption: 12px;
+  --text-caption-lh: 1.4;
+
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  --sidebar-width: 240px;
+  --sidebar-collapsed: 64px;
+  --radius-button: 6px;
+  --radius-card: 12px;
+  --nav-height: 64px;
+  --content-max-width: 1200px;
+  --text-max-width: 720px;
+
+  --transition-micro: 150ms;
+  --transition-standard: 200ms;
+  --transition-max: 400ms;
+  --ease-golden: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: light;
+}
+
+/* --------------------------------------------------------------------------
+   DARK MODE (Present — Creative Technologist)
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] {
+  --color-primary: #3B82F6;
+  --color-primary-muted: #60A5FA;
+  --color-accent: #F97316;
+  --color-accent-muted: #FB923C;
+
+  --surface-0: #09090B;
+  --surface-1: #18181B;
+  --surface-2: #27272A;
+  --surface-3: #3F3F46;
+
+  --text-primary: #FAFAFA;
+  --text-secondary: #A1A1AA;
+  --text-tertiary: #71717A;
+
+  color-scheme: dark;
+}
+
+/* --------------------------------------------------------------------------
+   THEME TRANSITION
+   -------------------------------------------------------------------------- */
+html {
+  transition: background-color 250ms ease;
+}
+html * {
+  transition: background-color 250ms ease, color 250ms ease, border-color 250ms ease;
+}
+/* Exclude elements that should not transition */
+html img, html video, html canvas, html svg path {
+  transition: none;
+}
+
+/* --------------------------------------------------------------------------
+   GLOBAL FOCUS STYLES
+   -------------------------------------------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-button);
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-primary) 25%, transparent);
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   ACCESSIBILITY KILL SWITCH
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   SCROLL REVEAL ANIMATIONS (GSAP-assisted, progressive enhancement)
+   Content is visible by default. GSAP hides then reveals on scroll.
+   -------------------------------------------------------------------------- */
+.reveal-section {
+  /* Visible by default — GSAP sets opacity:0 before animating */
+}
+
+/* --------------------------------------------------------------------------
+   HORIZONTAL SCROLL GALLERY
+   -------------------------------------------------------------------------- */
+.horizontal-gallery {
+  display: flex;
+  gap: var(--space-6);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding: var(--space-4) 0;
+}
+.horizontal-gallery::-webkit-scrollbar {
+  display: none;
+}
+.horizontal-gallery-item {
+  flex: 0 0 320px;
+  scroll-snap-align: start;
+}
+
+/* --------------------------------------------------------------------------
+   PROJECT CARD HOVER
+   -------------------------------------------------------------------------- */
+.project-card {
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out, border-color 200ms ease-out;
+}
+.project-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+[data-theme="dark"] .project-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  border-color: var(--text-tertiary);
+}
+.project-card:active {
+  transform: translateY(0px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: transform 100ms ease, box-shadow 100ms ease;
+}
+[data-theme="dark"] .project-card:active {
+  box-shadow: none;
+}
+/* Card-specific focus state per ProjectCard.md */
+.project-card:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--color-primary) 50%, transparent);
+  outline-offset: 2px;
+  transform: none;
+}
+
+.project-card .card-image {
+  transition: transform 400ms var(--ease-golden);
+}
+.project-card:hover .card-image {
+  will-change: transform;
+  transform: scale(1.04);
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-card:hover .card-image {
+    transform: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   TAG BADGES
+   -------------------------------------------------------------------------- */
+.tag-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  font-size: var(--text-caption);
+  line-height: var(--text-caption-lh);
+  font-weight: 500;
+  color: var(--text-secondary);
+  background-color: var(--surface-2);
+  border: 1px solid var(--surface-3);
+  border-radius: 4px;
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   NAV STYLES
+   -------------------------------------------------------------------------- */
+.top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-height);
+  z-index: 50;
+  background-color: color-mix(in srgb, var(--surface-0) 85%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid color-mix(in srgb, var(--surface-3) 50%, transparent);
+  transition: transform 300ms var(--ease-golden);
+}
+.top-nav.nav-hidden {
+  transform: translateY(-100%);
+}
+
+/* --------------------------------------------------------------------------
+   MOBILE MENU OVERLAY
+   -------------------------------------------------------------------------- */
+.mobile-menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background-color: var(--surface-0);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-8);
+}
+.mobile-menu-overlay.is-open {
+  display: flex;
+}
+
+/* --------------------------------------------------------------------------
+   CASE STUDY METRIC COUNT-UP
+   -------------------------------------------------------------------------- */
+.metric-value {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 600;
+  line-height: 1.1;
+  color: var(--color-accent);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+.metric-label {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  color: var(--text-secondary);
+  margin-top: var(--space-2);
+}
+
+/* --------------------------------------------------------------------------
+   CONTACT FORM
+   -------------------------------------------------------------------------- */
+.contact-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 var(--space-3);
+  background-color: var(--surface-1);
+  border: 1px solid var(--surface-3);
+  border-radius: var(--radius-button);
+  font-size: var(--text-body);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  transition: border-color 180ms ease;
+}
+.contact-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-primary) 15%, transparent);
+}
+.contact-textarea {
+  height: 140px;
+  padding: var(--space-3);
+  resize: vertical;
+}
+.contact-label {
+  font-size: var(--text-small);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: var(--space-1);
+  display: block;
+  font-family: var(--font-body);
+}
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 10px 24px;
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-button);
+  font-family: var(--font-body);
+  font-size: var(--text-small);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+/* Dark mode: orange (#F97316) fails contrast with white text (2.80:1).
+   Use dark text on bright orange for WCAG AA compliance. */
+[data-theme="dark"] .contact-btn {
+  color: #18181B;
+}
+.contact-btn:hover {
+  background-color: var(--color-accent-muted);
+  transform: translateY(-1px);
+}
+.contact-btn:active {
+  transform: translateY(0);
+}
+
+/* --------------------------------------------------------------------------
+   TAILWIND THEME
+   -------------------------------------------------------------------------- */
+@theme {
+  --font-display: 'Sora', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}

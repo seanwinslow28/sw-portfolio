@@ -1,0 +1,369 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScrollReveal from '../../components/ScrollReveal.jsx';
+import MetricCounter from '../../components/MetricCounter.jsx';
+import HorizontalGallery from '../../components/HorizontalGallery.jsx';
+
+const galleryItems = [
+  { caption: 'Initial user research synthesis — mapping pain points across student personas', placeholder: 'Research Board' },
+  { caption: 'Information architecture audit of the existing Campus platform', placeholder: 'IA Diagram' },
+  { caption: 'Wireframes for the redesigned course navigation and progress tracking', placeholder: 'Wireframes' },
+  { caption: 'Figma prototype — high-fidelity exploration of the learning dashboard', placeholder: 'Figma Mockup' },
+  { caption: 'Sprint planning board with prioritized backlog items', placeholder: 'Jira Board' },
+  { caption: 'A/B test results comparing new vs. legacy course completion flows', placeholder: 'Test Results' },
+];
+---
+
+<BaseLayout title="Campus 201 — Sean Winslow" description="Redesigning education for the crypto-native generation. A case study by Sean Winslow.">
+  <ScrollReveal client:visible>
+
+    <!-- Section 1: Hero -->
+    <section class="reveal-section case-hero">
+      <div class="case-back-wrap">
+        <a href="/" class="case-back-link" onmouseover="this.classList.add('hovered')" onmouseout="this.classList.remove('hovered')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to Work
+        </a>
+      </div>
+
+      <h1 class="case-title">
+        Campus 201
+      </h1>
+      <p class="case-subtitle">
+        Redesigning education for the crypto-native generation
+      </p>
+
+      <!-- Metadata -->
+      <div class="case-meta">
+        <div>
+          <div class="case-meta-label">Role</div>
+          <div class="case-meta-value">Associate PM</div>
+        </div>
+        <div>
+          <div class="case-meta-label">Timeline</div>
+          <div class="case-meta-value">Q4 2025 — Present</div>
+        </div>
+        <div>
+          <div class="case-meta-label">Company</div>
+          <div class="case-meta-value">The Block</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hero image placeholder -->
+    <section class="reveal-section case-hero-image-section">
+      <div class="case-hero-image">
+        <span class="case-placeholder-text">Hero Image / Video — Campus 201 Dashboard</span>
+      </div>
+    </section>
+
+    <!-- Section 2: Context -->
+    <section class="reveal-section case-text-section">
+      <h2 class="case-h2">
+        The Challenge
+      </h2>
+      <div class="case-body-stack">
+        <p class="case-body">
+          The Block's Campus platform needed to evolve from a basic content library into a structured learning experience that could serve thousands of crypto professionals. The existing system treated all content equally — there was no learning path, no progress tracking, and no way for students to know what to study next.
+        </p>
+        <p class="case-body">
+          Completion rates hovered around 23%. Student feedback consistently pointed to the same friction: "I don't know where I am in the curriculum" and "There's too much content and no structure." For a platform serving crypto-native professionals who value efficiency, this was unacceptable.
+        </p>
+        <p class="case-body">
+          The challenge wasn't just UX — it was architectural. We needed to introduce a course progression system, adaptive difficulty, and real-time progress tracking without disrupting the existing B2B relationships that depended on the current content structure.
+        </p>
+      </div>
+    </section>
+
+    <!-- Section 3: Process -->
+    <section class="reveal-section case-wide-section">
+      <h2 class="case-h2 case-h2--constrained">
+        The Approach
+      </h2>
+      <p class="case-body case-body--constrained case-body--spaced">
+        I led a structured discovery process that combined quantitative analytics with qualitative user research. We interviewed 24 active students, audited the information architecture, and mapped the entire content taxonomy before touching a single wireframe.
+      </p>
+      <HorizontalGallery client:visible items={galleryItems} />
+    </section>
+
+    <!-- Section 4: Solution -->
+    <section class="reveal-section case-wide-section">
+      <h2 class="case-h2 case-h2--constrained">
+        What We Built
+      </h2>
+      <p class="case-body case-body--constrained case-body--spaced-lg">
+        The redesigned Campus 201 introduced three key systems: a guided learning path engine, a real-time progress dashboard, and an adaptive content recommendation system. Students could now see exactly where they were in their learning journey and what to tackle next.
+      </p>
+
+      {/* Full-width mockup placeholders */}
+      <div class="case-mockup-grid">
+        <div class="case-mockup case-mockup--16-9">
+          <span class="case-placeholder-text">Full-width: Redesigned Learning Dashboard</span>
+        </div>
+
+        <div class="case-mockup-pair">
+          <div class="case-mockup case-mockup--4-3">
+            <span class="case-placeholder-text case-placeholder-text--small">Before: Content Library</span>
+          </div>
+          <div class="case-mockup case-mockup--4-3">
+            <span class="case-placeholder-text case-placeholder-text--small">After: Guided Learning Path</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Outcomes -->
+    <section class="reveal-section case-outcomes-section">
+      <h2 class="case-h2 case-h2--centered">
+        Results
+      </h2>
+
+      <div class="case-metrics-grid">
+        <MetricCounter client:visible target={40} prefix="+" suffix="%" label="Course Completion" />
+        <MetricCounter client:visible target={3} suffix="x" label="Student Engagement" />
+        <MetricCounter client:visible target={12} suffix=" Weeks" label="Time to Ship" />
+      </div>
+
+      <p class="case-body case-body--centered case-body--constrained case-body--centered-margin">
+        Within the first quarter post-launch, course completion rates jumped from 23% to over 63%. Student engagement — measured by returning daily active users — tripled. The engineering team shipped the core experience in just 12 weeks, with iterative improvements continuing month-over-month.
+      </p>
+    </section>
+
+    <!-- Section 6: Reflection -->
+    <section class="reveal-section case-reflection-section">
+      <h2 class="case-h2">
+        What I Learned
+      </h2>
+      <div class="case-body-stack">
+        <p class="case-body">
+          The biggest lesson from Campus 201 was that information architecture is product strategy. The content was always good — the structure was the problem. By investing heavily in taxonomy and navigation before visual design, we solved the root cause instead of treating symptoms.
+        </p>
+        <p class="case-body">
+          I also learned the power of progressive disclosure in education. Students don't want to see everything at once — they want to see what's next. This principle now guides how I think about every content-heavy product I work on.
+        </p>
+        <p class="case-body">
+          Finally, this project reinforced that PM work is most impactful when it bridges creative thinking and technical execution. My background in animation and storytelling helped me see the learning experience as a narrative — not just a feature list.
+        </p>
+      </div>
+    </section>
+
+  </ScrollReveal>
+</BaseLayout>
+
+<style is:global>
+  /* Hero section */
+  .case-hero {
+    padding: var(--space-24) var(--space-6) var(--space-16);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+  }
+
+  .case-back-wrap {
+    margin-bottom: var(--space-8);
+  }
+
+  .case-back-link {
+    font-family: var(--font-body);
+    font-size: var(--text-small);
+    color: var(--text-tertiary);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    transition: color 180ms ease;
+  }
+
+  .case-back-link:hover,
+  .case-back-link.hovered {
+    color: var(--text-secondary);
+  }
+
+  .case-title {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    line-height: var(--text-display-lh);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  .case-subtitle {
+    font-family: var(--font-body);
+    font-size: var(--text-h3);
+    line-height: var(--text-h3-lh);
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-8);
+    max-width: var(--text-max-width);
+  }
+
+  /* Metadata row */
+  .case-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    padding-top: var(--space-6);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .case-meta-label {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-1);
+  }
+
+  .case-meta-value {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  /* Hero image section */
+  .case-hero-image-section {
+    padding: 0 var(--space-6) var(--space-16);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+  }
+
+  .case-hero-image {
+    aspect-ratio: 16/9;
+    background-color: var(--surface-2);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--surface-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* Shared placeholder text */
+  .case-placeholder-text {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    color: var(--text-tertiary);
+  }
+
+  .case-placeholder-text--small {
+    font-size: var(--text-small);
+  }
+
+  /* Text-constrained section */
+  .case-text-section {
+    padding: var(--space-16) var(--space-6);
+    max-width: var(--text-max-width);
+    margin: 0 auto;
+  }
+
+  /* Wide (content-max-width) section */
+  .case-wide-section {
+    padding: var(--space-16) var(--space-6);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+  }
+
+  /* Shared h2 */
+  .case-h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-h2);
+    line-height: var(--text-h2-lh);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--space-8);
+  }
+
+  .case-h2--constrained {
+    max-width: var(--text-max-width);
+  }
+
+  .case-h2--centered {
+    text-align: center;
+    margin-bottom: var(--space-12);
+  }
+
+  /* Body text */
+  .case-body {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body-lh);
+    color: var(--text-secondary);
+  }
+
+  .case-body--constrained {
+    max-width: var(--text-max-width);
+  }
+
+  .case-body--spaced {
+    margin-bottom: var(--space-8);
+  }
+
+  .case-body--spaced-lg {
+    margin-bottom: var(--space-10);
+  }
+
+  .case-body--centered {
+    text-align: center;
+  }
+
+  .case-body--centered-margin {
+    margin: 0 auto;
+  }
+
+  .case-body-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  /* Mockup grid */
+  .case-mockup-grid {
+    display: grid;
+    gap: var(--space-6);
+  }
+
+  .case-mockup {
+    background-color: var(--surface-2);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--surface-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .case-mockup--16-9 {
+    aspect-ratio: 16/9;
+  }
+
+  .case-mockup--4-3 {
+    aspect-ratio: 4/3;
+  }
+
+  .case-mockup-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  /* Outcomes section */
+  .case-outcomes-section {
+    padding: var(--space-16) var(--space-6) var(--space-20);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+  }
+
+  .case-metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--space-10);
+    margin-bottom: var(--space-10);
+  }
+
+  /* Reflection section */
+  .case-reflection-section {
+    padding: var(--space-16) var(--space-6) var(--space-32);
+    max-width: var(--text-max-width);
+    margin: 0 auto;
+  }
+</style>

@@ -1,0 +1,236 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ScrollReveal from '../components/ScrollReveal.jsx';
+---
+
+<BaseLayout title="About — Sean Winslow" description="The story of a creative who learned to think like a product manager.">
+  <ScrollReveal client:visible>
+
+    <!-- About Hero -->
+    <section class="reveal-section about-hero-section">
+      <h1 class="about-title">
+        About
+      </h1>
+      <p class="about-subtitle">
+        A creative who learned to think in systems.
+      </p>
+    </section>
+
+    <!-- Chapter 1: The Artist -->
+    <section class="reveal-section about-chapter-section">
+      <div class="about-grid">
+        <div class="about-chapter-text">
+          <div class="about-chapter-label">Chapter 1</div>
+          <h2 class="about-chapter-h2">
+            The Artist
+          </h2>
+          <div class="about-body-stack">
+            <p class="about-body">
+              For twelve years, I was a freelance creative in New York City. Illustration, animation, film — if it involved telling a visual story, I was in. I worked with agencies, startups, and independent filmmakers, building a career around the belief that craft and clarity of communication are the same thing.
+            </p>
+            <p class="about-body">
+              Those years taught me something that would later prove invaluable: every creative project is a product problem in disguise. Who is the audience? What do they need to feel? What's the constraint? What's the deadline? I was doing product thinking without knowing the vocabulary.
+            </p>
+            <p class="about-body">
+              The animation work, in particular, built a muscle for systems thinking. When you're managing a 2D animation pipeline — storyboards, keyframes, in-betweens, compositing, sound design — you're managing dependencies, critical paths, and quality gates. You're running sprints, even if you don't call them that.
+            </p>
+          </div>
+        </div>
+        <div class="about-image-placeholder">
+          <span class="about-placeholder-text">Illustration / Animation Work</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="about-divider-wrap">
+      <div class="about-divider"></div>
+    </div>
+
+    <!-- Chapter 2: The Pivot -->
+    <section class="reveal-section about-chapter-section">
+      <div class="about-grid">
+        <div class="about-chapter-text">
+          <div class="about-chapter-label">Chapter 2</div>
+          <h2 class="about-chapter-h2">
+            The Pivot
+          </h2>
+          <div class="about-body-stack">
+            <p class="about-body">
+              In 2024, I made a deliberate career shift. The AI wave wasn't just changing creative work — it was redefining what it meant to build products. I recognized that the most impactful role in this new landscape wasn't the person drawing the frames, but the person deciding which frames to draw and why.
+            </p>
+            <p class="about-body">
+              I invested in PM education — courses, certifications, and most importantly, building. I created Pocket PM, a GPT-powered product management assistant, as both a learning exercise and a proof of concept. It forced me to think about API design, user research, and feature prioritization from the builder's seat.
+            </p>
+            <p class="about-body">
+              The pivot wasn't a departure from creativity — it was an evolution. Product management is creative problem-solving with constraints. The medium changed; the mindset didn't.
+            </p>
+          </div>
+        </div>
+        <div class="about-image-placeholder">
+          <span class="about-placeholder-text">Pocket PM / Career Transition</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider -->
+    <div class="about-divider-wrap">
+      <div class="about-divider"></div>
+    </div>
+
+    <!-- Chapter 3: The Builder -->
+    <section class="reveal-section about-chapter-section">
+      <div class="about-grid">
+        <div class="about-chapter-text">
+          <div class="about-chapter-label">Chapter 3</div>
+          <h2 class="about-chapter-h2">
+            The Builder
+          </h2>
+          <div class="about-body-stack">
+            <p class="about-body">
+              Landing at The Block as Associate PM gave me the platform to merge both worlds. My first major project — Campus 201 — was an education platform redesign that required exactly the kind of dual fluency I'd been building: the creative intuition to understand how people learn, and the technical rigor to ship a product at scale.
+            </p>
+            <p class="about-body">
+              In parallel, I've been building systems. The Superuser Pack — a Claude Code command center with 106 custom skills — emerged from my belief that PMs should be able to prototype, automate, and build without waiting for engineering cycles. The Animation Pipeline project applies AI to my original discipline, creating a production system that could democratize 2D animation.
+            </p>
+            <p class="about-body">
+              This is who I am now: someone who thinks in systems, builds with intention, and brings a creative sensibility to every product decision. The artist didn't disappear — the artist learned to scale.
+            </p>
+          </div>
+        </div>
+        <div class="about-image-placeholder">
+          <span class="about-placeholder-text">The Block / Builder Setup</span>
+        </div>
+      </div>
+    </section>
+
+    <!--
+      IMAGE SWIPER — Future Integration
+      Stacked card deck (9 art-style portraits) with drag-to-reveal interaction.
+      Reference implementation: sw-old-portfolio/Sean_Winslow_Personal_Portfolio-OLD/Sean-Winslow-Portfolio/src/components/ui/ImageSwiper.jsx
+      Spec: design-system-spec.md section 15 "Carried-Forward Feature: Image Swiper"
+      Cards: 360x480px, CSS perspective(700px), 50px drag threshold, 300ms transitions.
+      Place between Chapter 3 and the spacer as a standalone interactive section.
+    -->
+
+    <!-- Spacer -->
+    <div class="about-spacer"></div>
+
+  </ScrollReveal>
+</BaseLayout>
+
+<style is:global>
+  /* Hero */
+  .about-hero-section {
+    padding: var(--space-32) var(--space-6) var(--space-16);
+    max-width: var(--text-max-width);
+    margin: 0 auto;
+  }
+
+  .about-title {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    line-height: var(--text-display-lh);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  .about-subtitle {
+    font-family: var(--font-body);
+    font-size: var(--text-h3);
+    line-height: var(--text-h3-lh);
+    font-weight: 400;
+    color: var(--text-secondary);
+  }
+
+  /* Chapter sections */
+  .about-chapter-section {
+    padding: var(--space-16) var(--space-6);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+  }
+
+  /* Grid — single column by default, two columns on wider screens */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+    align-items: start;
+  }
+
+  @media (min-width: 768px) {
+    .about-grid {
+      grid-template-columns: 1.4fr 1fr;
+    }
+  }
+
+  .about-chapter-text {
+    max-width: var(--text-max-width);
+  }
+
+  .about-chapter-label {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-3);
+  }
+
+  .about-chapter-h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-h2);
+    line-height: var(--text-h2-lh);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--space-8);
+  }
+
+  .about-body-stack {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-6);
+  }
+
+  .about-body {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body-lh);
+    color: var(--text-secondary);
+  }
+
+  /* Image placeholder */
+  .about-image-placeholder {
+    aspect-ratio: 4/3;
+    background-color: var(--surface-2);
+    border-radius: var(--radius-card);
+    border: 1px solid var(--surface-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 280px;
+  }
+
+  .about-placeholder-text {
+    font-family: var(--font-body);
+    font-size: var(--text-small);
+    color: var(--text-tertiary);
+  }
+
+  /* Divider */
+  .about-divider-wrap {
+    max-width: var(--text-max-width);
+    margin: 0 auto;
+    padding: 0 var(--space-6);
+  }
+
+  .about-divider {
+    border-top: 1px solid var(--surface-3);
+  }
+
+  /* Bottom spacer */
+  .about-spacer {
+    height: var(--space-16);
+  }
+</style>

@@ -1,0 +1,371 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ScrollReveal from '../components/ScrollReveal.jsx';
+
+const projects = [
+  {
+    title: 'Campus 201',
+    slug: 'campus-201',
+    description: 'Education platform redesign at The Block',
+    tags: ['Product Management', 'UX', 'Education'],
+    placeholder: 'Dashboard Screenshot',
+    featured: true,
+  },
+  {
+    title: '16BitFit',
+    slug: '16bitfit',
+    description: 'Game Boy-inspired fitness RPG built with Phaser 3',
+    tags: ['Game Design', 'React Native', 'AI Art'],
+    placeholder: 'Pixel Art Game',
+  },
+  {
+    title: 'Animation Pipeline',
+    slug: 'animation-pipeline',
+    description: 'AI-assisted 2D animation production system',
+    tags: ['AI/ML', 'Animation', 'Pipeline Design'],
+    placeholder: 'Animation Frame',
+  },
+  {
+    title: 'Pocket PM',
+    slug: 'pocket-pm',
+    description: 'GPT-powered product management assistant',
+    tags: ['Product Management', 'API Design', 'AI'],
+    placeholder: 'App Screenshot',
+  },
+  {
+    title: 'Superuser Pack',
+    slug: 'superuser-pack',
+    description: 'Claude Code personal command center with 106 skills',
+    tags: ['Developer Tools', 'Automation', 'AI'],
+    placeholder: 'Terminal / Code',
+  },
+];
+---
+
+<BaseLayout title="Sean Winslow — PM Portfolio">
+  <!-- Hero Section: Museum Entrance -->
+  <section class="hero-section">
+    <div class="hero-noise"></div>
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">Sean Winslow</h1>
+        <p class="hero-tagline">I build products, animate stories, and obsess over the details between.</p>
+      </div>
+      <div class="hero-headshot" role="img" aria-label="Sean Winslow headshot placeholder">
+        <span class="hero-headshot-placeholder">SW</span>
+      </div>
+    </div>
+    <div class="hero-scroll-cue" aria-hidden="true">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="6 9 12 15 18 9" />
+      </svg>
+    </div>
+  </section>
+
+  <!-- Project Gallery -->
+  <ScrollReveal client:visible>
+    <section id="work" class="gallery-section">
+      <div class="reveal-section gallery-grid">
+        {projects.map((project) => (
+          <a href={`/work/${project.slug}/`} class={`project-card card-link ${project.featured ? 'card-featured' : ''}`}>
+            <div class="card-thumbnail">
+              <div class="card-image" style={`background-color: var(--surface-2);`}>
+                <span class="card-placeholder">{project.placeholder}</span>
+              </div>
+            </div>
+            <div class="card-content">
+              <h3 class={`card-title ${project.featured ? 'card-title-featured' : ''}`}>{project.title}</h3>
+              <p class="card-description">{project.description}</p>
+              <div class="card-tags">
+                {project.tags.map((tag) => (
+                  <span class="tag-badge">{tag}</span>
+                ))}
+              </div>
+              <span class="card-cta">
+                View Project
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="card-cta-arrow">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  </ScrollReveal>
+</BaseLayout>
+
+<style is:global>
+  /* ==========================================================================
+     HERO SECTION — Museum Entrance (spec section 15)
+     ========================================================================== */
+  .hero-section {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-6);
+    overflow: hidden;
+  }
+
+  /* Construction paper noise texture */
+  .hero-noise {
+    position: absolute;
+    inset: 0;
+    background-image: url('/images/noise.svg');
+    background-size: 300px 300px;
+    opacity: 0.025;
+    pointer-events: none;
+    animation: hero-drift 25s linear infinite;
+  }
+
+  @keyframes hero-drift {
+    from { background-position: 0 0; }
+    to { background-position: 300px 300px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-noise {
+      animation: none;
+    }
+  }
+
+  /* Hero content layout */
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-10);
+    max-width: var(--content-max-width);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .hero-content {
+      flex-direction: row;
+      text-align: left;
+      gap: var(--space-16);
+    }
+  }
+
+  .hero-text {
+    flex: 1;
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(48px, 8vw, 72px);
+    line-height: 1.05;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-6);
+    letter-spacing: -0.02em;
+  }
+
+  .hero-tagline {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    line-height: var(--text-h3-lh);
+    font-weight: 500;
+    color: var(--text-secondary);
+    max-width: 520px;
+  }
+
+  @media (max-width: 767px) {
+    .hero-tagline {
+      margin: 0 auto;
+    }
+  }
+
+  /* Headshot placeholder — B&W to color on hover */
+  .hero-headshot {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    background-color: var(--surface-2);
+    border: 1px solid var(--surface-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: grayscale(100%);
+    transition: filter 400ms ease-out;
+  }
+
+  .hero-headshot:hover {
+    filter: grayscale(0%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-headshot {
+      transition: none;
+    }
+  }
+
+  .hero-headshot-placeholder {
+    font-family: var(--font-display);
+    font-size: var(--text-h1);
+    font-weight: 600;
+    color: var(--text-tertiary);
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .hero-headshot {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  /* Scroll cue */
+  .hero-scroll-cue {
+    position: absolute;
+    bottom: var(--space-10);
+    left: 50%;
+    transform: translateX(-50%);
+    color: var(--text-tertiary);
+    animation: hero-bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes hero-bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 0.4; }
+    50% { transform: translateX(-50%) translateY(6px); opacity: 0.8; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-scroll-cue {
+      animation: none;
+      opacity: 0.5;
+    }
+  }
+
+  /* ==========================================================================
+     PROJECT GALLERY
+     ========================================================================== */
+  .gallery-section {
+    padding: 0 var(--space-6) var(--space-32);
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-10);
+  }
+
+  @media (min-width: 768px) {
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  /* Featured card spans full width */
+  @media (min-width: 768px) {
+    .card-featured {
+      grid-column: 1 / -1;
+    }
+  }
+
+  /* ==========================================================================
+     PROJECT CARDS (per ProjectCard.md mini-spec)
+     ========================================================================== */
+  .card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    background-color: var(--surface-1);
+    border: 1px solid var(--surface-3);
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .card-thumbnail {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+  }
+
+  .card-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-placeholder {
+    font-family: var(--font-body);
+    font-size: var(--text-small);
+    color: var(--text-tertiary);
+    opacity: 0.6;
+  }
+
+  .card-content {
+    padding: var(--space-6);
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: var(--text-h4);
+    line-height: var(--text-h4-lh);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .card-title-featured {
+    font-size: var(--text-h3);
+    line-height: var(--text-h3-lh);
+    font-weight: 600;
+  }
+
+  .card-description {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body-lh);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-4);
+  }
+
+  .card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    margin-bottom: var(--space-4);
+  }
+
+  .card-cta {
+    font-family: var(--font-body);
+    font-size: var(--text-small);
+    font-weight: 500;
+    color: var(--color-accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .card-cta-arrow {
+    transition: transform 200ms ease-out;
+  }
+
+  .project-card:hover .card-cta-arrow {
+    transform: translateX(4px);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-cta-arrow {
+      transition: none;
+    }
+    .project-card:hover .card-cta-arrow {
+      transform: none;
+    }
+  }
+</style>
