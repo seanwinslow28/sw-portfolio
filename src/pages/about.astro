@@ -1,6 +1,16 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ScrollReveal from '../components/ScrollReveal.jsx';
+import ImageSwiper from '../components/ImageSwiper.jsx';
+
+const swiperCards = [
+  { label: 'Illustrated Portrait — Pencil Test' },
+  { label: 'Animated Self-Portrait' },
+  { label: 'Stylized Digital Painting' },
+  { label: 'Ink & Wash Study' },
+  { label: 'Character Design Sheet' },
+  { label: 'Storyboard Sequence' },
+];
 ---
 
 <BaseLayout title="About — Sean Winslow" description="The story of a creative who learned to think like a product manager.">
@@ -104,14 +114,10 @@ import ScrollReveal from '../components/ScrollReveal.jsx';
       </div>
     </section>
 
-    <!--
-      IMAGE SWIPER — Future Integration
-      Stacked card deck (9 art-style portraits) with drag-to-reveal interaction.
-      Reference implementation: sw-old-portfolio/Sean_Winslow_Personal_Portfolio-OLD/Sean-Winslow-Portfolio/src/components/ui/ImageSwiper.jsx
-      Spec: design-system-spec.md section 15 "Carried-Forward Feature: Image Swiper"
-      Cards: 360x480px, CSS perspective(700px), 50px drag threshold, 300ms transitions.
-      Place between Chapter 3 and the spacer as a standalone interactive section.
-    -->
+    <!-- Image Swiper — art-style portrait card deck -->
+    <section class="reveal-section about-swiper-section">
+      <ImageSwiper client:visible cards={swiperCards} />
+    </section>
 
     <!-- Spacer -->
     <div class="about-spacer"></div>
@@ -227,6 +233,13 @@ import ScrollReveal from '../components/ScrollReveal.jsx';
 
   .about-divider {
     border-top: 1px solid var(--surface-3);
+  }
+
+  /* Image swiper section */
+  .about-swiper-section {
+    padding: var(--space-16) var(--space-6) var(--space-24);
+    display: flex;
+    justify-content: center;
   }
 
   /* Bottom spacer */

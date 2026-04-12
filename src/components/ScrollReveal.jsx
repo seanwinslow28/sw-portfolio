@@ -27,20 +27,19 @@ export default function ScrollReveal({ children }) {
         ctx = gsap.context(() => {
           sections.forEach((section, i) => {
             // Set initial hidden state via GSAP (not CSS)
-            gsap.set(section, { opacity: 0, y: 20 });
-            
+            gsap.set(section, { opacity: 0, y: 16 });
+
             gsap.to(section, {
               opacity: 1,
               y: 0,
-              duration: 0.8,
-              ease: 'power3.out',
+              duration: 0.4,
+              ease: 'power4.out', // maps to --ease-decelerate
               scrollTrigger: {
                 trigger: section,
                 start: 'top 85%',
-                end: 'top 50%',
                 toggleActions: 'play none none none',
               },
-              delay: i * 0.05,
+              delay: i * 0.06,
             });
           });
         }, containerRef);

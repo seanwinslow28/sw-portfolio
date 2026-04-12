@@ -1,0 +1,165 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Design Arena — Hero Explorations">
+  <div class="arena-nav">
+    <h2 class="arena-title">Hero Design Arena</h2>
+    <p class="arena-subtitle">5 competing directions — scroll to compare</p>
+    <nav class="arena-links">
+      <a href="#hero-a">A: Pencil Test</a>
+      <a href="#hero-b">B: Parallax Multiplane</a>
+      <a href="#hero-c">C: Oversized Editorial</a>
+      <a href="#hero-d">D: Film Cel</a>
+      <a href="#hero-e">E: Kinetic Ticker</a>
+    </nav>
+  </div>
+
+  <!-- Variation A -->
+  <div id="hero-a" class="arena-section">
+    <div class="arena-label">A — Pencil Test / Draw-On Animation (Fraunces serif)</div>
+  </div>
+  <div id="arena-mount-a"></div>
+
+  <!-- Variation B -->
+  <div id="hero-b" class="arena-section">
+    <div class="arena-label">B — Parallax Multiplane / Mouse-Responsive Depth (Syne)</div>
+  </div>
+  <div id="arena-mount-b"></div>
+
+  <!-- Variation C -->
+  <div id="hero-c" class="arena-section">
+    <div class="arena-label">C — Oversized Editorial / Typography IS the Design (Instrument Serif + Space Grotesk)</div>
+  </div>
+  <div id="arena-mount-c"></div>
+
+  <!-- Variation D -->
+  <div id="hero-d" class="arena-section">
+    <div class="arena-label">D — Film Cel / Immersive Dark Environment (Bricolage Grotesque)</div>
+  </div>
+  <div id="arena-mount-d"></div>
+
+  <!-- Variation E -->
+  <div id="hero-e" class="arena-section">
+    <div class="arena-label">E — Kinetic Ticker / Motion as Language (Space Grotesk)</div>
+  </div>
+  <div id="arena-mount-e"></div>
+</BaseLayout>
+
+<script>
+  import { createElement } from 'react';
+  import { createRoot } from 'react-dom/client';
+
+  async function mountAll() {
+    try {
+      const [A, B, C, D, E] = await Promise.all([
+        import('../../design-arena/HeroA_PencilTest.jsx'),
+        import('../../design-arena/HeroB_ParallaxMultiplane.jsx'),
+        import('../../design-arena/HeroC_OversizedEditorial.jsx'),
+        import('../../design-arena/HeroD_FilmCel.jsx'),
+        import('../../design-arena/HeroE_KineticTicker.jsx'),
+      ]);
+
+      const mounts = [
+        { el: 'arena-mount-a', comp: A.default },
+        { el: 'arena-mount-b', comp: B.default },
+        { el: 'arena-mount-c', comp: C.default },
+        { el: 'arena-mount-d', comp: D.default },
+        { el: 'arena-mount-e', comp: E.default },
+      ];
+
+      for (const { el, comp } of mounts) {
+        const container = document.getElementById(el);
+        if (container) {
+          try {
+            createRoot(container).render(createElement(comp));
+          } catch (err) {
+            console.error(`[Arena] Failed to render ${el}:`, err);
+            container.innerHTML = `<pre style="color:red;padding:16px;">Error in ${el}: ${err.message}</pre>`;
+          }
+        } else {
+          console.warn(`[Arena] Mount point #${el} not found`);
+        }
+      }
+    } catch (err) {
+      console.error('[Arena] Failed to import components:', err);
+      document.getElementById('arena-mount-a')?.insertAdjacentHTML(
+        'beforebegin',
+        `<pre style="color:red;padding:16px;">Import error: ${err.message}</pre>`
+      );
+    }
+  }
+
+  // Mount on initial load and on View Transition navigation
+  mountAll();
+  document.addEventListener('astro:page-load', mountAll);
+</script>
+
+<style>
+  .arena-nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: var(--surface-0);
+    border-bottom: 1px solid var(--surface-3);
+    padding: var(--space-4) var(--space-6);
+    text-align: center;
+  }
+
+  .arena-title {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-1);
+  }
+
+  .arena-subtitle {
+    font-family: var(--font-body);
+    font-size: var(--text-small);
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-3);
+  }
+
+  .arena-links {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .arena-links a {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    color: var(--color-primary);
+    text-decoration: none;
+    padding: var(--space-1) var(--space-3);
+    border: 1px solid var(--color-primary);
+    border-radius: 6px;
+    transition: background 200ms var(--ease-standard), color 200ms var(--ease-standard);
+  }
+
+  .arena-links a:hover {
+    background: var(--color-primary);
+    color: var(--surface-0);
+  }
+
+  .arena-section {
+    padding: var(--space-4) var(--space-6);
+    border-top: 2px solid var(--color-primary);
+    margin-top: var(--space-16);
+  }
+
+  .arena-section:first-of-type {
+    margin-top: 0;
+  }
+
+  .arena-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-primary);
+    padding: var(--space-2) 0;
+  }
+</style>

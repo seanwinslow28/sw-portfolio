@@ -20,7 +20,7 @@ export default function MetricCounter({ target, prefix = '', suffix = '', label 
           observer.disconnect();
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.15 }
     );
 
     if (containerRef.current) {
