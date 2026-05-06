@@ -1,0 +1,231 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ScrollReveal from '../../components/ScrollReveal.jsx';
+
+const transactions = [
+  {
+    slug: 'phase-d-typed-edges',
+    title: 'Phase D — Typed Reasoning Edges',
+    valueProp:
+      'A typed-edge SQLite layer the nightly synthesizer writes to as a side effect of connection articles. Six relation types (supports, contradicts, evolved_into, supersedes, depends_on, related_to) turn weekly knowledge-lint contradiction detection into a SQL query instead of an LLM scan.',
+    explanationUrl:
+      'https://github.com/seanwinslow28/CLAUDE-CODE-SUPERUSER-PACK/blob/main/docs/phase-d-typed-edges/EXPLANATION.md',
+    codeUrl:
+      'https://github.com/seanwinslow28/CLAUDE-CODE-SUPERUSER-PACK/blob/main/agents-sdk/lib/concept_edges.py',
+    codeLabel: 'agents-sdk/lib/concept_edges.py',
+    shipped: 'May 2026 · v3.20.0',
+  },
+  {
+    slug: 'knowledge-loop-phase-6',
+    title: 'Knowledge Loop — Phase 6 (Producer + Consumer)',
+    valueProp:
+      'A closed loop that turns Claude Code session transcripts into a queryable knowledge graph the LLM maintains. Producer side flushes decisions to daily notes, then synthesizes concept and connection articles nightly. Consumer side injects the index into every new session and answers terminal Q&A with two-pass orchestration.',
+    explanationUrl:
+      'https://github.com/seanwinslow28/CLAUDE-CODE-SUPERUSER-PACK/blob/main/docs/knowledge-loop/EXPLANATION.md',
+    codeUrl:
+      'https://github.com/seanwinslow28/CLAUDE-CODE-SUPERUSER-PACK/tree/main/agents-sdk/agents',
+    codeLabel: 'agents-sdk/agents/',
+    shipped: 'May 2026 · v3.14.3 → v3.20.0',
+  },
+];
+---
+
+<BaseLayout
+  title="Transactions — Sean Winslow"
+  description="Small, completed units of work with the explanation attached. The discipline lives at the artifact; this page is the index."
+>
+  <ScrollReveal client:visible>
+    <!-- Hero -->
+    <section class="reveal-section transactions-hero-section">
+      <h1 class="transactions-title">Transactions</h1>
+      <p class="transactions-subtitle">
+        Small, completed units of work, with the explanation attached. Each transaction names the artifact, what it does, and links to the four-question writeup that justifies the shape it took. The discipline lives at the artifact; this is the index.
+      </p>
+    </section>
+
+    <!-- Transactions list -->
+    <section class="reveal-section transactions-list-section">
+      <ul class="transactions-list">
+        {transactions.map((t) => (
+          <li class="transaction-card">
+            <div class="transaction-meta">
+              <span class="transaction-slug">{t.slug}</span>
+              <span class="transaction-shipped">{t.shipped}</span>
+            </div>
+            <h2 class="transaction-h2">{t.title}</h2>
+            <p class="transaction-value-prop">{t.valueProp}</p>
+            <div class="transaction-links">
+              <a class="transaction-link transaction-link-primary" href={t.explanationUrl}>
+                Read the 4Q
+                <span aria-hidden="true" class="transaction-link-arrow">↗</span>
+              </a>
+              <a class="transaction-link" href={t.codeUrl}>
+                <span class="transaction-link-codepath">{t.codeLabel}</span>
+                <span aria-hidden="true" class="transaction-link-arrow">↗</span>
+              </a>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <!-- Spacer -->
+    <div class="transactions-spacer"></div>
+  </ScrollReveal>
+</BaseLayout>
+
+<style is:global>
+  /* Hero */
+  .transactions-hero-section {
+    padding: var(--space-32) var(--space-6) var(--space-8);
+    max-width: var(--text-max-width);
+    margin: 0 auto;
+  }
+
+  .transactions-title {
+    font-family: var(--font-display);
+    font-size: var(--text-display);
+    line-height: var(--text-display-lh);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  .transactions-subtitle {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body-lh);
+    font-weight: 400;
+    color: var(--text-secondary);
+    max-width: 60ch;
+  }
+
+  /* List */
+  .transactions-list-section {
+    padding: var(--space-8) var(--space-6) var(--space-16);
+    max-width: var(--text-max-width);
+    margin: 0 auto;
+  }
+
+  .transactions-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-10);
+  }
+
+  /* Card */
+  .transaction-card {
+    border-top: 1px solid var(--surface-3);
+    padding-top: var(--space-8);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .transaction-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+  }
+
+  .transaction-slug {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: var(--text-caption);
+    color: var(--text-tertiary);
+    text-transform: lowercase;
+    letter-spacing: 0.02em;
+  }
+
+  .transaction-shipped {
+    font-family: var(--font-body);
+    font-size: var(--text-caption);
+    color: var(--text-tertiary);
+  }
+
+  .transaction-h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-h2);
+    line-height: var(--text-h2-lh);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin: 0;
+  }
+
+  .transaction-value-prop {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body-lh);
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 64ch;
+  }
+
+  /* Links */
+  .transaction-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-6);
+    margin-top: var(--space-2);
+  }
+
+  .transaction-link {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-size: var(--text-small);
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    border-bottom: 1px solid var(--surface-3);
+    padding-bottom: var(--space-1);
+    transition: border-color 200ms ease, color 200ms ease;
+  }
+
+  .transaction-link:hover {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+  }
+
+  .transaction-link-primary {
+    color: var(--accent-primary);
+    border-bottom-color: var(--accent-primary);
+  }
+
+  .transaction-link-codepath {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: calc(var(--text-small) * 0.95);
+    color: var(--text-secondary);
+  }
+
+  .transaction-link-arrow {
+    display: inline-block;
+    transform: translateY(-1px);
+    transition: transform 200ms ease;
+  }
+
+  .transaction-link:hover .transaction-link-arrow {
+    transform: translate(2px, -3px);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .transaction-link,
+    .transaction-link-arrow {
+      transition: none;
+    }
+    .transaction-link:hover .transaction-link-arrow {
+      transform: translateY(-1px);
+    }
+  }
+
+  /* Spacer */
+  .transactions-spacer {
+    height: var(--space-16);
+  }
+</style>
