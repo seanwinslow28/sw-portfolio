@@ -3,6 +3,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ScrollReveal from '../../components/ScrollReveal.jsx';
 import MetricCounter from '../../components/MetricCounter.jsx';
 import HorizontalGallery from '../../components/HorizontalGallery.jsx';
+import ScrollProgress from '../../components/ScrollProgress.jsx';
+import CaseStudyChoreography from '../../components/CaseStudyChoreography.jsx';
 
 const galleryItems = [
   { caption: 'Initial user research synthesis — mapping pain points across student personas', placeholder: 'Research Board' },
@@ -15,6 +17,8 @@ const galleryItems = [
 ---
 
 <BaseLayout title="Campus 201 — Sean Winslow" description="Redesigning education for the crypto-native generation. A case study by Sean Winslow.">
+  <ScrollProgress client:load />
+  <CaseStudyChoreography client:visible />
   <ScrollReveal client:visible>
 
     <!-- Section 1: Hero -->
@@ -170,7 +174,7 @@ const galleryItems = [
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    transition: color 180ms ease;
+    transition: color var(--duration-small) var(--ease-standard);
   }
 
   .case-back-link:hover,

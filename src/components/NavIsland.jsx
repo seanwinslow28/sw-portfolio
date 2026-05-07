@@ -87,7 +87,7 @@ export default function NavIsland({ currentPath = '/' }) {
               fontWeight: 500,
               color: 'var(--text-primary)',
               textDecoration: 'none',
-              transition: 'color 180ms ease',
+              transition: 'color 200ms',
             }}
             aria-label="Sean Winslow — Home"
           >
@@ -112,9 +112,9 @@ export default function NavIsland({ currentPath = '/' }) {
                   fontFamily: 'var(--font-body)',
                   fontSize: 'var(--text-small)',
                   fontWeight: 500,
-                  color: isActive(href) ? 'var(--text-primary)' : 'var(--text-secondary)',
+                  color: isActive(href) ? 'var(--color-primary)' : 'var(--text-secondary)',
                   textDecoration: 'none',
-                  transition: 'color 180ms ease',
+                  transition: 'color 200ms var(--ease-standard)',
                 }}
                 onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; }}
                 onMouseLeave={(e) => { if (!isActive(href)) e.currentTarget.style.color = 'var(--text-secondary)'; }}
@@ -135,7 +135,7 @@ export default function NavIsland({ currentPath = '/' }) {
                 height: 36,
                 borderRadius: 'var(--radius-button)',
                 color: 'var(--text-secondary)',
-                transition: 'color 180ms ease',
+                transition: 'color 200ms',
               }}
               onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; }}
               onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; }}

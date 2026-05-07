@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ScrollReveal from '../components/ScrollReveal.jsx';
+import HeroEntrance from '../components/HeroEntrance.jsx';
 
 const projects = [
   {
@@ -43,24 +44,11 @@ const projects = [
 ---
 
 <BaseLayout title="Sean Winslow — PM Portfolio">
-  <!-- Hero Section: Museum Entrance -->
-  <section class="hero-section">
-    <div class="hero-noise"></div>
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1 class="hero-title">Sean Winslow</h1>
-        <p class="hero-tagline">I build products, animate stories, and obsess over the details between.</p>
-      </div>
-      <div class="hero-headshot" role="img" aria-label="Sean Winslow headshot placeholder">
-        <span class="hero-headshot-placeholder">SW</span>
-      </div>
-    </div>
-    <div class="hero-scroll-cue" aria-hidden="true">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="6 9 12 15 18 9" />
-      </svg>
-    </div>
-  </section>
+  <!-- Hero Section: Museum Entrance — V3 orchestrated entrance -->
+  <HeroEntrance
+    client:load
+    tagline="I build products, animate stories, and obsess over the details between."
+  />
 
   <!-- Project Gallery -->
   <ScrollReveal client:visible>
@@ -98,7 +86,7 @@ const projects = [
 
 <style is:global>
   /* ==========================================================================
-     HERO SECTION — Museum Entrance (spec section 15)
+     HERO SECTION — V3 Museum Entrance: pencil-test paper + asymmetric layout
      ========================================================================== */
   .hero-section {
     position: relative;
@@ -111,60 +99,119 @@ const projects = [
     overflow: hidden;
   }
 
-  /* Construction paper noise texture */
-  .hero-noise {
-    position: absolute;
+  /* ---------- Pencil-test paper texture (inline SVG feTurbulence) ---------- */
+  .hero-paper-texture {
+    position: fixed;
     inset: 0;
-    background-image: url('/images/noise.svg');
-    background-size: 300px 300px;
-    opacity: 0.025;
     pointer-events: none;
-    animation: hero-drift 25s linear infinite;
+    z-index: 9999;
+    opacity: 0.03;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 300px 300px;
+    animation: paper-drift 25s linear infinite;
   }
 
-  @keyframes hero-drift {
-    from { background-position: 0 0; }
-    to { background-position: 300px 300px; }
+  [data-theme="dark"] .hero-paper-texture {
+    opacity: 0.015;
+    mix-blend-mode: screen;
+  }
+
+  @keyframes paper-drift {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+    100% { transform: translateX(0); }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .hero-noise {
+    .hero-paper-texture {
       animation: none;
     }
   }
 
-  /* Hero content layout */
+  /* ---------- Registration marks (light mode only) ---------- */
+  .hero-reg-marks {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  [data-theme="dark"] .hero-reg-marks {
+    display: none;
+  }
+
+  .reg-crosshair {
+    position: absolute;
+    top: var(--space-8);
+    left: var(--space-8);
+    font-family: var(--font-mono);
+    font-size: 20px;
+    line-height: 1;
+    color: var(--text-tertiary);
+    opacity: 0.15;
+    user-select: none;
+  }
+
+  .reg-circle {
+    position: absolute;
+    bottom: 30%;
+    right: var(--space-12);
+    width: 12px;
+    height: 12px;
+    border: 1.5px solid var(--text-tertiary);
+    border-radius: 50%;
+    opacity: 0.12;
+  }
+
+  .reg-frame-number {
+    position: absolute;
+    bottom: var(--space-8);
+    right: var(--space-8);
+    font-family: var(--font-mono);
+    font-size: var(--text-caption);
+    line-height: var(--text-caption-lh);
+    letter-spacing: var(--text-caption-ls);
+    color: var(--text-tertiary);
+    opacity: 0.2;
+    user-select: none;
+  }
+
+  /* ---------- Hero content: asymmetric 60/40 ---------- */
   .hero-content {
     position: relative;
-    z-index: 1;
+    z-index: 3;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     gap: var(--space-10);
-    max-width: var(--content-max-width);
+    max-width: var(--hero-max-width);
+    width: 100%;
     text-align: center;
   }
 
   @media (min-width: 768px) {
     .hero-content {
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      align-items: center;
       text-align: left;
       gap: var(--space-16);
     }
   }
 
   .hero-text {
-    flex: 1;
+    min-width: 0;
   }
 
   .hero-title {
     font-family: var(--font-display);
-    font-size: clamp(48px, 8vw, 72px);
-    line-height: 1.05;
-    font-weight: 600;
+    font-size: var(--text-display);
+    line-height: var(--text-display-lh);
+    font-weight: 700;
     color: var(--text-primary);
     margin-bottom: var(--space-6);
-    letter-spacing: -0.02em;
+    letter-spacing: var(--text-display-ls);
   }
 
   .hero-tagline {
@@ -182,20 +229,21 @@ const projects = [
     }
   }
 
-  /* Headshot placeholder — B&W to color on hover */
+  /* ---------- Headshot: B&W circle → color bloom on hover ---------- */
   .hero-headshot {
     width: 180px;
     height: 180px;
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
+    justify-self: center;
     background-color: var(--surface-2);
     border: 1px solid var(--surface-3);
     display: flex;
     align-items: center;
     justify-content: center;
     filter: grayscale(100%);
-    transition: filter 400ms ease-out;
+    transition: filter 400ms var(--ease-standard);
   }
 
   .hero-headshot:hover {
@@ -223,14 +271,14 @@ const projects = [
     }
   }
 
-  /* Scroll cue */
+  /* ---------- Scroll cue ---------- */
   .hero-scroll-cue {
     position: absolute;
     bottom: var(--space-10);
     left: 50%;
     transform: translateX(-50%);
     color: var(--text-tertiary);
-    animation: hero-bounce 2s ease-in-out infinite;
+    animation: hero-bounce 2s var(--ease-smooth) infinite;
   }
 
   @keyframes hero-bounce {
@@ -353,7 +401,7 @@ const projects = [
   }
 
   .card-cta-arrow {
-    transition: transform 200ms ease-out;
+    transition: transform var(--duration-small) var(--ease-standard);
   }
 
   .project-card:hover .card-cta-arrow {
