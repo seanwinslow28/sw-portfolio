@@ -19,3 +19,7 @@ dist/
 .claude/*.log
 .claude/worktrees/
 .agents/
+
+# Tier-0 / personal context (load-bearing for local sessions, not for public repo)
+Sean-Winslow-Full-Personal-Context-v*.md
+DESIGN-SPEC-V*.md

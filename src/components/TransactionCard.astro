@@ -1,0 +1,90 @@
+---
+interface Props {
+  slug: string;
+  dateline: string;
+  beat: string;
+  title: string;
+  valueProp: string;
+  producedBy: string;
+}
+
+const { slug, dateline, beat, title, valueProp, producedBy } = Astro.props;
+
+// Determine beat color class
+let beatClass = 'beat-default';
+if (beat === 'agentic-engineering') beatClass = 'beat-primary';
+if (beat === 'creative-pipeline') beatClass = 'beat-accent';
+if (beat === 'cushion-economics') beatClass = 'beat-stamp';
+---
+
+<a href={`/transactions/${slug}`} class="transaction-card card-link">
+  <div class="card-content">
+    <div class="transaction-card-top">
+      <span class="text-dateline">{dateline}</span>
+      <span class={`transaction-beat ${beatClass}`}>{beat}</span>
+    </div>
+    
+    <h3 class="transaction-title">{title}</h3>
+    <p class="transaction-value-prop">{valueProp}</p>
+    
+    <div class="transaction-card-bottom">
+      <span class="transaction-produced-by">Produced by {producedBy}</span>
+    </div>
+  </div>
+</a>
+
+<style>
+  /* Base card inherits from .card-link in global.css */
+  .transaction-card {
+    display: block;
+    padding: var(--space-6);
+  }
+
+  .transaction-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--space-4);
+    margin-bottom: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .transaction-beat {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: var(--text-caption);
+  }
+  .beat-primary { color: var(--color-primary); }
+  .beat-accent { color: var(--color-accent); }
+  .beat-stamp { color: var(--color-stamp); }
+  .beat-default { color: var(--text-secondary); }
+
+  .transaction-title {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    line-height: var(--text-h3-lh);
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .transaction-value-prop {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body-lh);
+    color: var(--text-secondary);
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .transaction-card-bottom {
+    margin-top: var(--space-3);
+  }
+
+  .transaction-produced-by {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: var(--text-caption);
+    color: var(--text-tertiary);
+  }
+</style>

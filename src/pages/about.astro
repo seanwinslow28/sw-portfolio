@@ -1,7 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ScrollReveal from '../components/ScrollReveal.jsx';
-import ImageSwiper from '../components/ImageSwiper.jsx';
+// ImageSwiper deferred to V5 per DESIGN-SPEC-V4 §10
+// import ImageSwiper from '../components/ImageSwiper.jsx';
 
 const swiperCards = [
   { label: 'Illustrated Portrait — Pencil Test' },
@@ -36,13 +37,13 @@ const swiperCards = [
           </h2>
           <div class="about-body-stack">
             <p class="about-body">
-              For twelve years, I was a freelance creative in New York City. Illustration, animation, film — if it involved telling a visual story, I was in. I worked with agencies, startups, and independent filmmakers, building a career around the belief that craft and clarity of communication are the same thing.
+              For twelve years, I paid rent in New York City by drawing things. Illustration, animation, the occasional film storyboard — if it involved telling a visual story, I was probably in the room, drinking cold coffee and trying to hit a deadline. I worked with agencies and independent filmmakers, building a career around the naive but useful belief that craft and clarity are basically the same thing.
             </p>
             <p class="about-body">
-              Those years taught me something that would later prove invaluable: every creative project is a product problem in disguise. Who is the audience? What do they need to feel? What's the constraint? What's the deadline? I was doing product thinking without knowing the vocabulary.
+              Those years taught me a secret that I didn't have the vocabulary for yet: every creative project is just a product problem in a turtleneck. Who is the audience? What do they need to feel? Why is the budget so small? I was doing product thinking; I just didn't know the corporate buzzwords yet.
             </p>
             <p class="about-body">
-              The animation work, in particular, built a muscle for systems thinking. When you're managing a 2D animation pipeline — storyboards, keyframes, in-betweens, compositing, sound design — you're managing dependencies, critical paths, and quality gates. You're running sprints, even if you don't call them that.
+              Managing a 2D animation pipeline — storyboards, keyframes, sound design — forces you to think in systems. You're managing dependencies, critical paths, and quality gates. You're running sprints, even if you just call it "trying to finish the scene before Tuesday."
             </p>
           </div>
         </div>
@@ -67,13 +68,13 @@ const swiperCards = [
           </h2>
           <div class="about-body-stack">
             <p class="about-body">
-              In 2024, I made a deliberate career shift. The AI wave wasn't just changing creative work — it was redefining what it meant to build products. I recognized that the most impactful role in this new landscape wasn't the person drawing the frames, but the person deciding which frames to draw and why.
+              In 2024, I made a deliberate pivot. The AI wave wasn't just changing how people drew — it was changing what it meant to build products entirely. I realized pretty quickly that the most impactful job wasn't going to be the person drawing the frames, but the person deciding which frames actually needed to be drawn in the first place.
             </p>
             <p class="about-body">
-              I invested in PM education — courses, certifications, and most importantly, building. I created Pocket PM, a GPT-powered product management assistant, as both a learning exercise and a proof of concept. It forced me to think about API design, user research, and feature prioritization from the builder's seat.
+              So I went back to school, kind of. I invested in PM courses, and more importantly, I started building. I created Pocket PM, a GPT-powered assistant, mostly because I needed one and couldn't afford a real consultant. It forced me to figure out API design and user research from the builder's side of the table.
             </p>
             <p class="about-body">
-              The pivot wasn't a departure from creativity — it was an evolution. Product management is creative problem-solving with constraints. The medium changed; the mindset didn't.
+              The pivot wasn't really a departure from creativity — it was just evolution. Product management is creative problem-solving with a spreadsheet. The medium changed, but the mindset stuck around.
             </p>
           </div>
         </div>
@@ -98,13 +99,13 @@ const swiperCards = [
           </h2>
           <div class="about-body-stack">
             <p class="about-body">
-              Landing at The Block as Associate PM gave me the platform to merge both worlds. My first major project — Campus 201 — was an education platform redesign that required exactly the kind of dual fluency I'd been building: the creative intuition to understand how people learn, and the technical rigor to ship a product at scale.
+              Landing at The Block as an Associate PM finally let me merge both worlds without feeling like I was living a double life. My first major project — Campus 201 — was an education platform redesign that needed exactly what I had: the creative intuition to know how people learn, and the technical rigor to actually ship the thing before we all grew old.
             </p>
             <p class="about-body">
-              In parallel, I've been building systems. The Superuser Pack — a Claude Code command center with 106 custom skills — emerged from my belief that PMs should be able to prototype, automate, and build without waiting for engineering cycles. The Animation Pipeline project applies AI to my original discipline, creating a production system that could democratize 2D animation.
+              I've also been building my own systems in parallel. The Superuser Pack — basically a Claude Code command center with over a hundred custom skills — came from my stubborn belief that PMs shouldn't have to wait for engineering cycles just to prototype an idea. And my AI Animation Pipeline is trying to do for 2D animation what the printing press did for books. (Or at least, make it a lot faster.)
             </p>
             <p class="about-body">
-              This is who I am now: someone who thinks in systems, builds with intention, and brings a creative sensibility to every product decision. The artist didn't disappear — the artist learned to scale.
+              So this is who I am now: someone who thinks in systems, builds with intention, and brings a creative sensibility to the table. The artist didn't disappear. He just learned how to scale.
             </p>
           </div>
         </div>
@@ -114,10 +115,12 @@ const swiperCards = [
       </div>
     </section>
 
-    <!-- Image Swiper — art-style portrait card deck -->
+    <!-- Image Swiper — art-style portrait card deck (Deferred to V5) -->
+    <!-- 
     <section class="reveal-section about-swiper-section">
       <ImageSwiper client:visible cards={swiperCards} />
     </section>
+    -->
 
     <!-- Spacer -->
     <div class="about-spacer"></div>

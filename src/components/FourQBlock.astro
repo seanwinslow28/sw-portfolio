@@ -1,0 +1,59 @@
+---
+interface Props {
+  q1?: string;
+  q2?: string;
+  q3?: string;
+  q4?: string;
+}
+
+const {
+  q1 = "What is this?",
+  q2 = "Why this approach?",
+  q3 = "What would break?",
+  q4 = "What did I learn?"
+} = Astro.props;
+---
+
+<div class="fourq-block">
+  <h2 class="fourq-section-title">Explanation</h2>
+  
+  <div class="fourq-list">
+    <slot />
+  </div>
+</div>
+
+<style is:global>
+  .fourq-block {
+    margin: var(--space-12) 0;
+  }
+
+  .fourq-section-title {
+    font-family: var(--font-display);
+    font-size: var(--text-h2);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--space-8);
+  }
+
+  .fourq-list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-8);
+  }
+
+  /* Target markdown rendered headings and paragraphs inside the slot */
+  .fourq-list h2, .fourq-list h3 {
+    font-family: var(--font-display);
+    font-size: var(--text-h4);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--space-3);
+  }
+
+  .fourq-list p {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    color: var(--text-primary);
+    max-width: 720px;
+  }
+</style>

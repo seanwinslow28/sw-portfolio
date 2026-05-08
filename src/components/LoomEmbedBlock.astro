@@ -1,0 +1,69 @@
+---
+interface Props {
+  url: string;
+  frameNumber?: string;
+}
+
+const { url, frameNumber } = Astro.props;
+---
+
+<div class="loom-embed-block">
+  <div class="loom-container skeleton">
+    <iframe
+      src={url}
+      frameborder="0"
+      webkitallowfullscreen
+      mozallowfullscreen
+      allowfullscreen
+      class="loom-iframe"
+    ></iframe>
+  </div>
+  {frameNumber && (
+    <div class="loom-caption">
+      <span class="frame-number">{frameNumber}</span>
+    </div>
+  )}
+</div>
+
+<style>
+  .loom-embed-block {
+    width: 100%;
+    max-width: 720px;
+    margin: var(--space-8) 0;
+  }
+
+  .loom-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    border: 1px solid var(--surface-3);
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    overflow: hidden;
+  }
+
+  [data-theme="dark"] .loom-container {
+    box-shadow: none;
+  }
+
+  .loom-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Above skeleton */
+  }
+
+  .loom-caption {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: var(--space-2);
+  }
+
+  .frame-number {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: var(--text-caption);
+    color: var(--color-stamp);
+  }
+</style>
