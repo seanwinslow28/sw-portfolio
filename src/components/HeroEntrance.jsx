@@ -16,9 +16,16 @@ import SplitTextReveal from './SplitTextReveal.jsx';
  * prefers-reduced-motion: all elements appear immediately.
  */
 export default function HeroEntrance({ tagline }) {
+  // --- HERO STATE CONFIGURATION (DESIGN-SPEC-V4 §8) ---
+  // State 1: Pre-Character (active May 6 -> June 10).
+  // State 2: With-Character (activates June 11).
+  // State 3: Celebratory (reserved for V5 post-employment).
+  const HERO_STATE = 1; // Swap to 2 when pencil-test character ships
+
   const [nameComplete, setNameComplete] = useState(false);
   const taglineRef = useRef(null);
   const headshotRef = useRef(null);
+  const characterRef = useRef(null);
   const regMarksRef = useRef(null);
   const scrollCueRef = useRef(null);
 
@@ -55,10 +62,11 @@ export default function HeroEntrance({ tagline }) {
           });
         }
 
-        // Headshot fade-in at 400ms
-        if (headshotRef.current) {
-          gsap.set(headshotRef.current, { opacity: 0 });
-          gsap.to(headshotRef.current, {
+        // Headshot or Character fade-in at 400ms
+        const activeVisualRef = HERO_STATE === 1 ? headshotRef : characterRef;
+        if (activeVisualRef.current) {
+          gsap.set(activeVisualRef.current, { opacity: 0 });
+          gsap.to(activeVisualRef.current, {
             opacity: 1,
             duration: 0.5,
             ease: 'power4.out',
@@ -90,8 +98,8 @@ export default function HeroEntrance({ tagline }) {
         }
       } catch {
         // Fallback: show everything
-        [taglineRef, headshotRef, regMarksRef, scrollCueRef].forEach((ref) => {
-          if (ref.current) {
+        [taglineRef, headshotRef, characterRef, regMarksRef, scrollCueRef].forEach((ref) => {
+          if (ref && ref.current) {
             ref.current.style.opacity = '1';
             ref.current.style.transform = 'none';
           }
@@ -129,15 +137,33 @@ export default function HeroEntrance({ tagline }) {
           </p>
         </div>
 
-        <div
-          ref={headshotRef}
-          className="hero-headshot"
-          role="img"
-          aria-label="Sean Winslow headshot placeholder"
-          style={{ opacity: 0 }}
-        >
-          <span className="hero-headshot-placeholder">SW</span>
-        </div>
+        {HERO_STATE === 1 && (
+          <div
+            ref={headshotRef}
+            className="hero-headshot"
+            role="img"
+            aria-label="Sean Winslow headshot"
+            style={{ opacity: 0 }}
+          >
+            {/* The V2 headshot is the primary hero for State 1 */}
+            <img src="/images/headshot-v2.jpg" alt="Sean Winslow" onError={(e) => { e.target.style.display='none'; e.target.nextSibling.style.display='block'; }} style={{width: '100%', height: '100%', objectFit: 'cover'}} />
+            <span className="hero-headshot-placeholder" style={{display: 'none'}}>SW</span>
+          </div>
+        )}
+
+        {HERO_STATE === 2 && (
+          <div
+            ref={characterRef}
+            className="hero-character"
+            aria-label="Pencil test animation character"
+            style={{ opacity: 0, width: '300px', height: '300px' }}
+          >
+            {/* Scaffolded for June 11. Drop the MP4/GIF here. */}
+            <div className="skeleton" style={{width: '100%', height: '100%', borderRadius: '12px'}}></div>
+          </div>
+        )}
+
+        {/* HERO_STATE === 3: Celebratory (reserved for post-employment offer signing) */}
       </div>
 
       {/* Scroll cue */}

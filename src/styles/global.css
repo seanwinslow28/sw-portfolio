@@ -75,6 +75,7 @@ p, li, figcaption { text-wrap: pretty; max-width: 72ch; }
   --color-warning: #B45309;
   --color-error: #DC2626;
   --color-info: #0D7377;
+  --color-stamp: #7C2D12;
 
   /* Typography */
   --font-display: 'Sora', system-ui, sans-serif;
@@ -175,6 +176,7 @@ p, li, figcaption { text-wrap: pretty; max-width: 72ch; }
   --color-warning: #F59E0B;
   --color-error: #EF4444;
   --color-info: #14B8A6;
+  --color-stamp: #FB923C;
 
   color-scheme: dark;
 }
@@ -527,6 +529,17 @@ html img, html video, html canvas, html svg path {
 .contact-btn:active {
   transform: translateY(1px) scale(0.98);
   transition-duration: var(--duration-micro);
+}
+
+/* --------------------------------------------------------------------------
+   TYPOGRAPHY ROLES (V4)
+   -------------------------------------------------------------------------- */
+.text-dateline {
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: var(--text-caption);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-stamp);
 }
 
 /* --------------------------------------------------------------------------

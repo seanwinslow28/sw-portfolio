@@ -2,7 +2,7 @@
 
 ## Read First
 
-- **`DESIGN-SPEC-V3.md`** is the single source of truth for all visual decisions. Read it before building any UI.
+- **`DESIGN-SPEC-V4.md`** is the single source of truth for all visual decisions. Read it before building any UI.
 - **`docs/ProjectCard.md`** has the component mini-spec for the portfolio card component.
 
 ## Project Overview
@@ -72,6 +72,6 @@
 
 ## Before Building Any UI
 
-1. Read `DESIGN-SPEC-V3.md`
+1. Read `DESIGN-SPEC-V4.md`
 2. Check `docs/` for component mini-specs
 3. After building, verify against the spec

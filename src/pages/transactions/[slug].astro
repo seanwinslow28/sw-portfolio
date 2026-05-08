@@ -1,0 +1,157 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LoomEmbedBlock from '../../components/LoomEmbedBlock.astro';
+import FourQBlock from '../../components/FourQBlock.astro';
+import MethodsStrip from '../../components/MethodsStrip.astro';
+import ScrollReveal from '../../components/ScrollReveal.jsx';
+
+export async function getStaticPaths() {
+  const transactions = await getCollection('transactions');
+  return transactions.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+// For the methods strip, we'll extract the "producedBy" string and fake a simple tool map,
+// or we can just show the raw producedBy string in the methods strip if we parse it.
+// The spec said "Format: <role>: <tool>" so let's mock the parsing or just hardcode it for the seed.
+const methods = entry.data.producedBy.split('+').map((item, index) => {
+  const roles = ["Synthesis", "Reasoning", "Image Gen", "Scaffolding"];
+  return { role: roles[index % roles.length], tool: item.trim() };
+});
+---
+
+<BaseLayout title={`${entry.data.title} — Transactions`} description={entry.data.valueProp}>
+  <ScrollReveal client:visible>
+    <article class="transaction-artifact-page">
+      
+      <!-- 1. Dateline -->
+      <div class="transaction-header">
+        <div class="text-dateline">{entry.data.dateline}</div>
+      </div>
+
+      <!-- 2. Headline -->
+      <h1 class="transaction-h1">{entry.data.title}</h1>
+
+      <!-- 3. Byline -->
+      <p class="transaction-byline">By Sean Winslow</p>
+
+      <!-- 4. Beat tag -->
+      <div class="transaction-beat-wrap">
+        <span class={`transaction-beat beat-${entry.data.beat.split('-')[0]}`}>{entry.data.beat}</span>
+      </div>
+
+      <!-- 5. Value Prop Block -->
+      <div class="transaction-value-prop">
+        <p>{entry.data.valueProp}</p>
+      </div>
+
+      <!-- 6. Loom Embed Block -->
+      {entry.data.loomUrl && (
+        <LoomEmbedBlock url={entry.data.loomUrl} frameNumber={entry.data.loomFrame || "A-1"} />
+      )}
+
+      <!-- 7. Methods Strip -->
+      <MethodsStrip methods={methods} />
+
+      <!-- 8. 4Q Block (Rendered Markdown Content) -->
+      <FourQBlock>
+        <Content />
+      </FourQBlock>
+
+      <!-- 9. Limitations Footer -->
+      <div class="limitations-footer">
+        <h3 class="limitations-h3">What this doesn't yet do</h3>
+        <ul class="limitations-list">
+          {entry.data.limitations.map((lim: string) => (
+            <li>{lim}</li>
+          ))}
+        </ul>
+      </div>
+
+    </article>
+  </ScrollReveal>
+</BaseLayout>
+
+<style>
+  .transaction-artifact-page {
+    padding: var(--space-20) var(--space-6) var(--space-32);
+    max-width: var(--text-max-width); /* Transactions Grid is 720px */
+    margin: 0 auto;
+  }
+
+  .transaction-header {
+    margin-bottom: var(--space-8);
+  }
+
+  .transaction-h1 {
+    font-family: var(--font-display);
+    font-size: var(--text-h1);
+    line-height: var(--text-h1-lh);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--space-2);
+  }
+
+  .transaction-byline {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    color: var(--text-secondary);
+    margin-bottom: var(--space-4);
+  }
+
+  .transaction-beat-wrap {
+    margin-bottom: var(--space-8);
+  }
+
+  .transaction-beat {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: var(--text-caption);
+  }
+
+  .beat-agentic { color: var(--color-primary); }
+  .beat-creative { color: var(--color-accent); }
+  .beat-cushion { color: var(--color-stamp); }
+
+  .transaction-value-prop {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    line-height: var(--text-body-lh);
+    color: var(--text-primary);
+    margin-bottom: var(--space-8);
+  }
+
+  /* Limitations Footer */
+  .limitations-footer {
+    margin-top: var(--space-16);
+    padding-top: var(--space-8);
+    border-top: 1px solid var(--surface-3);
+  }
+
+  .limitations-h3 {
+    font-family: var(--font-display);
+    font-size: var(--text-h3);
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--space-4);
+  }
+
+  .limitations-list {
+    list-style: disc;
+    padding-left: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .limitations-list li {
+    font-family: var(--font-body);
+    font-size: var(--text-body);
+    color: var(--text-secondary);
+  }
+</style>

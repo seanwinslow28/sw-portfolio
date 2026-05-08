@@ -1,0 +1,46 @@
+---
+interface Props {
+  methods: { role: string; tool: string }[];
+}
+
+const { methods } = Astro.props;
+---
+
+<div class="methods-strip">
+  <div class="methods-inner">
+    {methods.map((m) => (
+      <div class="method-row">
+        <span class="method-role">{m.role}:</span>
+        <span class="method-tool">{m.tool}</span>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .methods-strip {
+    border-top: 1px solid var(--surface-3);
+    border-bottom: 1px solid var(--surface-3);
+    padding: var(--space-3) 0;
+    margin: var(--space-8) 0;
+    max-width: 720px;
+  }
+
+  .methods-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .method-row {
+    font-family: var(--font-mono, 'JetBrains Mono', monospace);
+    font-size: var(--text-caption);
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .method-role {
+    display: inline-block;
+    min-width: 120px; /* Optional: aligns the colons, wait the spec just said "<role>: <tool>" */
+  }
+</style>

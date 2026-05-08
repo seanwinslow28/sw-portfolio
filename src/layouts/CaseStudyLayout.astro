@@ -1,0 +1,23 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import ScrollProgress from '../components/ScrollProgress.jsx';
+import CaseStudyChoreography from '../components/CaseStudyChoreography.jsx';
+
+interface Props {
+  title: string;
+  description: string;
+  choreography?: 'cinematic' | 'default';
+}
+
+const { title, description, choreography = 'default' } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  {choreography === 'cinematic' && (
+    <>
+      <ScrollProgress client:load />
+      <CaseStudyChoreography client:visible />
+    </>
+  )}
+  <slot />
+</BaseLayout>
